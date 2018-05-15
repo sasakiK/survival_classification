@@ -7,17 +7,15 @@ import pandas as pd
 from pathlib import Path
 
 @click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def process_raw_df(input_filepath, output_filepath):
+@click.argument('input_filename')
+@click.argument('output_filename')
+def process_raw_df(input_filename, output_filename):
 
-
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
+    FROM_DATA_DIR = "data/raw/"
+    TO_DATA_DIR = "data/processed/"
 
     # load dataset
-    df= pd.read_csv(input_filepath).replace("male",0).replace("female",1)
+    df= pd.read_csv(FROM_DATA_DIR + input_filename).replace("male",0).replace("female",1)
 
     # treat missing data
     df["Age"].fillna(df.Age.median(), inplace=True)
@@ -26,9 +24,9 @@ def process_raw_df(input_filepath, output_filepath):
     df["FamilySize"] = df["SibSp"] + df["Parch"] + 1
     df2 = df.drop(["Name", "SibSp", "Parch", "Ticket", "Fare", "Cabin", "Embarked"], axis=1)
 
-    df2.to_csv(output_filepath)
+    df2.to_csv(TO_DATA_DIR + output_filename, index=None)
 
-    print(os.getcwd())
+    # print(os.getcwd())
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
 
