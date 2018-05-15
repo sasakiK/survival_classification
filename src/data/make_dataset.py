@@ -10,6 +10,9 @@ from pathlib import Path
 @click.argument('input_filename')
 @click.argument('output_filename')
 def process_raw_df(input_filename, output_filename):
+    """prepare dataset from data/raw/train.csv
+       output will saved in data/processed/.
+    """
 
     FROM_DATA_DIR = "data/raw/"
     TO_DATA_DIR = "data/processed/"
@@ -29,6 +32,8 @@ def process_raw_df(input_filename, output_filename):
     # print(os.getcwd())
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
+
+    click.echo(df2.shape)
 
 
 def main():
