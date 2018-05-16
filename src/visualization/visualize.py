@@ -5,8 +5,6 @@ import pandas as pd
 
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
-
-
 def score_result(actual, predict, model_name):
 
     print("----------------- Result of {} -----------------".format(model_name))

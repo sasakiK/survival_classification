@@ -33,6 +33,7 @@ def process_raw_df(input_filename, output_filename):
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
 
+    # echo result dataframe shape
     click.echo(df2.shape)
 
 

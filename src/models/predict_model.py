@@ -7,13 +7,13 @@ from datetime import datetime
 from sklearn.externals import joblib
 
 @click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-def predict_model(input_filename):
+@click.argument('input_filename')
+def predict_models(input_filename):
 
     FROM_DATA_DIR = "data/processed/"
 
     # prepare tets data
-    df = pd.read_csv(input_filepath)
+    df = pd.read_csv(FROM_DATA_DIR + input_filename)
 
     # define train dataset
     train_data = df.values
@@ -51,7 +51,7 @@ def predict_model(input_filename):
 
 
 def main():
-    predict_model()
+    predict_models()
 
 
 if __name__ == '__main__':
